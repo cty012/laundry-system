@@ -1,0 +1,27 @@
+{
+  "name": "laundry-recorder",
+  "version": "1.0.0",
+  "description": "A online system that manages and records people using laundry.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cty012/laundry-recorder.git"
+  },
+  "keywords": [
+    "laundry"
+  ],
+  "author": "Daniel Cao, Jonathan Li",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cty012/laundry-recorder/issues"
+  },
+  "homepage": "https://github.com/cty012/laundry-recorder#readme",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1"
+  }
+}
