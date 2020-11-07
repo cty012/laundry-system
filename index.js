@@ -40,7 +40,7 @@ var appManager = new AppManager(path.join(__dirname, "/public/resources/app"));
 
 //Deal with GET request
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "/public/views/home/helloworld.html"));
+    res.sendFile(path.join(__dirname, "/public/views/helloworld.html"));
 });
 
 
