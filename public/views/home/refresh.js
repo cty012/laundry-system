@@ -16,7 +16,6 @@ function refresh(xhttp) {
     };
     xhttp.open("GET", "/status", true);
     xhttp.send();
-    console.log("refreshed!");
 }
 
 function loadMachine(id, data) {
@@ -36,7 +35,6 @@ function loadMachine(id, data) {
         return;
     }
     var remaining_time = data["start_time"] + time_limit - Date.now();
-    console.log(remaining_time / 1000);
     var remaining_minute = Math.ceil(remaining_time / parseFloat(minute));
     machine_time.innerHTML = remaining_minute + " min";
     changeColor(machine_time, remaining_minute > 0? "blue" : "red");
@@ -53,7 +51,8 @@ function changeColor(element, color) {
 }
 
 function loadQueue(machine_type, data) {
-    element = document.getElementById("queue");
+    console.log("queue-" + machine_type);
+    element = document.getElementById("queue-" + machine_type);
     element.innerHTML = "";
     data.forEach(person => {
         element.innerHTML += `<div class="queue-person">${person}</div>`
@@ -71,11 +70,10 @@ function queue(xhttp, action, machine_type) {
             for (var id in data.machines) {
                 loadMachine(id, data.machines[id]);
             }
-            loadQueue(id, data.queue["washer"]);
-            loadQueue(id, data.queue["dryer"]);
+            loadQueue("washer", data.queue["washer"]);
+            loadQueue("dryer", data.queue["dryer"]);
         }
     };
     xhttp.open("GET", `/queue/${machine_type}/${action}/usr/${username}/pwd/${password}`, true);
     xhttp.send();
-    console.log("refreshed!");
 }
