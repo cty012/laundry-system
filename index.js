@@ -26,22 +26,31 @@ function home(req, res) {
 app.get("/", home);
 app.get("/home", home);
 
-app.get("/status", (req, res) => {
-    var status = Object.assign(washer.readMachines(), dryer.readMachines());
-    res.json(status);
-});
-
-app.get("/queue/:machine_type/:action/usr/:username/pwd/:password", (req, res) => {
-    // add to queue
-    var machine_type = {"washer": washer, "dryer": dryer}[req.params.machine_type];
-    if (req.params.action == "enter") {
-        machine_type.add(req.params.username);
-    } else if (req.params.action == "exit") {
-        machine_type.remove(req.params.username);
-    }
+function getStatus(req, res) {
     washer.checkFinish();
     dryer.checkFinish();
-    // response
-    var status = Object.assign(washer.readMachines(), dryer.readMachines());
-    res.json(status);
+    res.json({
+        machines: Object.assign(washer.readMachines(), dryer.readMachines()),
+        queue: {
+            "washer": washer.readQueue(),
+            "dryer": dryer.readQueue()
+        }
+    });
+}
+
+app.get("/status", getStatus);
+
+app.get("/queue/:machine_type/:action/usr/:username/pwd/:password", (req, res) => {
+    // check password
+    dbManager.getUserPassword(req.params.username, password => {
+        if (password != req.params.password) return;
+        // add to queue
+        var machine_type = {"washer": washer, "dryer": dryer}[req.params.machine_type];
+        if (req.params.action == "enter") {
+            machine_type.add(req.params.username);
+        } else if (req.params.action == "exit") {
+            machine_type.remove(req.params.username);
+        }
+        getStatus(req, res);
+    });
 });

@@ -31,6 +31,7 @@ class DBManager {
         var query = `Select * FROM users WHERE username=?;`;
         this.conn.query(query, [username], function (err, result) {
             if (err) throw err;
+            if (result.length == 0) return;
             callback(result[0].password);
         });
     }

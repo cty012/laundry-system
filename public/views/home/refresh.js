@@ -7,9 +7,11 @@ function refresh(xhttp) {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             data = JSON.parse(xhttp.responseText);
-            for (var id in data) {
-                loadMachine(id, data[id]);
+            for (var id in data.machines) {
+                loadMachine(id, data.machines[id]);
             }
+            loadQueue("washer", data.queue["washer"]);
+            loadQueue("dryer", data.queue["dryer"]);
         }
     };
     xhttp.open("GET", "/status", true);
@@ -48,4 +50,32 @@ function changeColor(element, color) {
         return;
     }
     element.classList.add(color);
+}
+
+function loadQueue(machine_type, data) {
+    element = document.getElementById("queue");
+    element.innerHTML = "";
+    data.forEach(person => {
+        element.innerHTML += `<div class="queue-person">${person}</div>`
+    });
+}
+
+function queue(xhttp, action, machine_type) {
+    join_form = document.getElementById(`join-${machine_type}`);
+    username = join_form.getElementsByClassName("join-usr-input")[0].value;
+    password = join_form.getElementsByClassName("join-pwd-input")[0].value;
+    // send request
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            data = JSON.parse(xhttp.responseText);
+            for (var id in data.machines) {
+                loadMachine(id, data.machines[id]);
+            }
+            loadQueue(id, data.queue["washer"]);
+            loadQueue(id, data.queue["dryer"]);
+        }
+    };
+    xhttp.open("GET", `/queue/${machine_type}/${action}/usr/${username}/pwd/${password}`, true);
+    xhttp.send();
+    console.log("refreshed!");
 }
