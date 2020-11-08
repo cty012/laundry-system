@@ -1,0 +1,108 @@
+@machine-width: 250px;
+@machine-height: 80px;
+@machine-margin-lr: 20px;
+@machine-margin-tb: 10px;
+@contents-width: @machine-width * 4 + @machine-margin-lr * 8;
+@contents-height: @machine-height * 3 + @machine-margin-tb * 6;
+@contents-margin: 30px;
+@join-form-margin: 50px;
+@join-form-width: @contents-width / 2 - @join-form-margin * 2;
+@join-form-height: 100px;
+
+body {
+    text-align: center;
+}
+
+#contents {
+    width: @contents-width;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: @contents-margin;
+}
+
+#current {
+    width: @contents-width;
+    height: calc(@contents-height + 12px);
+}
+
+#washer {
+    background-color: #ddddff;
+    width: 50%;
+    float: left;
+}
+
+#dryer {
+    background-color: #ffdddd;
+    width: 50%;
+    float: left;
+}
+
+.machine {
+    font-family: helvetica;
+    font-size: 18px;
+    background-color: white;
+    width: calc(@machine-width - 4px);
+    height: @machine-height;
+    border: 2px solid black;
+    margin: @machine-margin-tb @machine-margin-lr;
+    float: left;
+    position: relative;
+}
+
+.machine-name {
+    font-size: 24px;
+    font-weight: 600;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+}
+
+.machine-status {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+.machine-person {
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
+}
+
+.machine-time {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+}
+
+#join {
+    background-color: #dddddd;
+    width: calc(100% - @join-form-margin * 2);
+    margin: 20px 0px;
+    padding: 10px @join-form-margin;
+}
+
+.join-form {
+    background-color: white;
+    width: calc(@join-form-width - 10px);
+    height: @join-form-height;
+    border: 2px solid black;
+    margin: 0px @join-form-margin;
+    float: left;
+}
+
+#queue {
+
+}
+
+.red {
+    color: red;
+}
+
+.blue {
+    color: blue;
+}
+
+.green {
+    color: green;
+}

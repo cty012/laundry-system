@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const process = require("process");
+
 const db = require("./database/manager.js");
 
 // Change default folder
@@ -15,21 +16,29 @@ app.listen("8080");
 var dbManager = new db.DBManager("laundry", "prismsus", "laundry_system");
 
 // Deal with GET request
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "/public/views/login/index.html"));
-});
+function home(req, res) {
+    res.sendFile(path.join(__dirname, "/public/views/home/index.html"));
+}
 
-app.get("/login", (req, res) => {
-    res.sendFile(path.join(__dirname, "/public/views/login/index.html"));
-});
+app.get("/", home);
+app.get("/home", home);
 
-// Deal with POST request
-app.post("/home", (req, res) => {
-    username = req.body.username;
-    password = req.body.password;
-    dbManager.getUserPassword(username, pwd => {
-        if (pwd == password) {
-            res.render(path.join(__dirname, "/public/views/home/index.ejs"), data = {username: username});
+app.get("/status/washer", (req, res) => {
+    res.json([
+        {
+            "id": "W1",
+            "status": "idle",
+            "person": null,
+            "start_time": null
         }
+    ]);
+});
+
+app.get("/status/washer/:id", (req, res) => {
+    res.json({
+        "id": req.params.id,
+        "status": "idle",
+        "person": null,
+        "start_time": null
     });
 });
