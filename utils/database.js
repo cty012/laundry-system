@@ -7,7 +7,7 @@ class DBManager {
         this.password = password;
         this.database = database;
         this.conn = mysql.createConnection({
-            host: "127.0.0.1",
+            host: "localhost",
             user: this.user,
             password: this.password,
             database: this.database,

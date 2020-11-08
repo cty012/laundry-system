@@ -89,11 +89,89 @@ body {
     height: @join-form-height;
     border: 2px solid black;
     margin: 0px @join-form-margin;
+    position: relative;
     float: left;
 }
 
-#queue {
+.join-label {
+    font-family: helvetica;
+    position: absolute;
+    left: 15px;
+}
 
+.join-input {
+    font-size: 15px;
+    width: 290px;
+    height: 40px;
+    padding: 0px 5px;
+    position: absolute;
+    left: 10px;
+}
+
+.join-usr-label {
+    .join-label();
+    top: 10px;
+}
+
+.join-usr-input {
+    .join-input();
+    top: 28px;
+}
+
+.join-pwd-label {
+    .join-label();
+    top: calc(@join-form-height / 2);
+}
+
+.join-pwd-input {
+    .join-input();
+    top: calc(@join-form-height / 2 + 18px);
+}
+
+.join-submit {
+    font-size: 15px;
+    width: 120px;
+    height: 40px;
+    padding: 0px 5px;
+    position: absolute;
+    right: 20px;
+}
+
+.join-submit-enter {
+    .join-submit();
+    background-color: #ddeedd;
+    &:hover {
+        background-color: #d0e0d0;
+    }
+    &:active {
+        background-color: #c0d0c0;
+    }
+    top: 28px;
+}
+
+.join-submit-exit {
+    .join-submit();
+    background-color: #ffdddd;
+    &:hover {
+        background-color: #f0d0d0;
+    }
+    &:active {
+        background-color: #e0c0c0;
+    }
+    top: calc(@join-form-height / 2 + 18px);
+}
+
+#queue {
+    width: calc(@contents-width / 2);
+    background-color: #dddddd;
+}
+
+.queue-person {
+    text-align: left;
+    background-color: inherit;
+    width: calc(50% - 20px);
+    padding: 10px 10px;
+    float: left;
 }
 
 .red {
