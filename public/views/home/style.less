@@ -7,7 +7,7 @@
 @contents-margin: 30px;
 @join-form-margin: 50px;
 @join-form-width: @contents-width / 2 - @join-form-margin * 2;
-@join-form-height: 100px;
+@join-form-height: 150px;
 
 body {
     text-align: center;
@@ -77,14 +77,15 @@ body {
 
 #join {
     background-color: #dddddd;
-    width: calc(100% - @join-form-margin * 2);
+    width: 100%;
+    height: calc(@join-form-height + 4px);
     margin: 20px 0px;
-    padding: 10px @join-form-margin;
+    padding: 20px 0px;
 }
 
 .join-form {
     background-color: white;
-    width: calc(@join-form-width - 10px);
+    width: calc(@join-form-width - 4px);
     height: @join-form-height;
     border: 2px solid black;
     margin: 0px @join-form-margin;
